@@ -26,7 +26,9 @@ function renderItems() {
     tasks.forEach((item) => {
         const taskListWrapper = document.createElement('div')
         const line = document.createElement('div')
-        line.classList.add()
+        const stringWrap = document.createElement('div')
+        stringWrap.classList.add('stringWrap')
+        line.classList.add('line')
 
 
         const nameTask = document.createElement('div')
@@ -48,26 +50,21 @@ function renderItems() {
         nameTask.textContent = item.name
         nameResponsible.textContent = item.responsible
         levelPriority.textContent = item.priority
-        if (levelPriority.textContent === 'Low') {
-            levelPriority.classList.add('priorityLow')
-        }
-        if (levelPriority.textContent === 'Medium') {
-            levelPriority.classList.add('priorityMedium')
-        }
-        if (levelPriority.textContent === 'Hight') {
-            levelPriority.classList.add('priorityHight')
-        }
+        const priority = levelPriority.textContent
+        levelPriority.classList.add(`priority${priority}`)
 
         taskListWrapper.append(nameTask)
         taskListWrapper.append(nameResponsible)
         taskListWrapper.append(levelPriority)
         taskListWrapper.append(checkBtn)
-
-        taskList.append(taskListWrapper)
+            // taskListWrapper.append(line)
+        stringWrap.append(taskListWrapper)
+        stringWrap.append(line)
+        taskList.append(stringWrap)
 
         taskCount = taskList.childElementCount - 1;
         taskListWrapper.id = `${taskCount}`
-        checkBtn.addEventListener('click', () => removeTask(+taskListWrapper.id))
+        checkBtn.addEventListener('click', () => removeTask(Number(taskListWrapper.id)))
 
     })
 
@@ -75,7 +72,7 @@ function renderItems() {
 }
 
 function addTask() {
-    if (tasks.find((elem) => elem.name === taskInput.value) || taskInput.value == "") {
+    if (tasks.find((elem) => elem.name === taskInput.value) || taskInput.value === "") {
 
     } else {
         tasks.push({
