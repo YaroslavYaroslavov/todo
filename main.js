@@ -7,15 +7,10 @@ const taskInput = document.querySelector('.taskInput'),
     taskList = document.querySelector('.taskList');
 let taskCount = taskList.childElementCount;
 let tasks = []
-if (localStorage.getItem('tasksStorage')) {
-    console.log(localStorage.getItem('tasksStorage'))
-
+document.addEventListener('DOMContentLoaded', () => {
     tasks = JSON.parse(localStorage.getItem('tasksStorage'))
-    console.log(tasks)
     renderItems()
-} else {
-    console.log('q')
-}
+})
 
 
 
@@ -31,7 +26,7 @@ function renderItems() {
     tasks.forEach((item) => {
         const taskListWrapper = document.createElement('div')
         const line = document.createElement('div')
-        line.classList.add('line')
+        line.classList.add()
 
 
         const nameTask = document.createElement('div')
@@ -69,7 +64,7 @@ function renderItems() {
         taskListWrapper.append(checkBtn)
 
         taskList.append(taskListWrapper)
-        taskList.append(line)
+
         taskCount = taskList.childElementCount - 1;
         taskListWrapper.id = `${taskCount}`
         checkBtn.addEventListener('click', () => removeTask(+taskListWrapper.id))
