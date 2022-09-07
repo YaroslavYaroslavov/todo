@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logoText">Task List</div>
+        <div class="wrapper">
+            <input class="taskInput" type="text" name="task" placeholder="Enter a task here">
+            <select class="selectMember" name="selectMember" id="">
+                <option value="Пушок">Пушок</option>
+                <option value="Снежок">Снежок</option>
+                <option value="Снежинка">Снежинка</option>
+                <option value="Пушинка">Пушинка</option>
+            </select>
+            <select class="selectPriority" name="selectPriority" id="">
+                <option value="Low" >Low</option>
+                
+                <option value="Medium">Medium</option>
+                
+                <option value="Hight">Hihgt</option>
+            </select>
+            <button class="saveBtn">Add Task</button>
+
+        </div>
+
+        <div class="taskList">
+            <div class="taskListWrapper">
+            </div>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+
+</html>

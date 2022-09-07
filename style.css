@@ -1,0 +1,117 @@
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .taskListWrapper {
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .wrapper {
+        /* width: 700px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 900px;
+        border-color: black;
+        border: 1px solid black;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    
+    .logoText {
+        width: 150px;
+        margin: auto;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-size: 25px;
+        font-weight: bold;
+    }
+    
+    .checkBtn {
+        background-color: #fff;
+        background-image: url(./materials/checkbox-active-svgrepo-com.svg);
+        width: 27px;
+        height: 27px;
+        border: none;
+        margin-left: 36.5px;
+        margin-right: 36.5px;
+    }
+    
+    .saveBtn {
+        width: 100px;
+        height: 31px;
+        border: 1px solid black;
+    }
+    
+    .taskInput {
+        width: 200px;
+        height: 29px;
+        padding: 0px;
+        border: 1px solid black;
+        margin-right: 10px;
+    }
+    
+    .selectMember {
+        width: 200px;
+        height: 31px;
+        margin-right: 10px;
+        border: 1px solid black;
+    }
+    
+    .selectPriority {
+        width: 7 0px;
+        height: 31px;
+        margin-right: 10px;
+        border: 1px solid black;
+    }
+    
+    .nameTask {
+        width: 200px;
+        padding: 0px;
+        margin-right: 10px;
+        word-wrap: break-word
+    }
+    
+    .nameResponsible {
+        width: 200px;
+        margin-right: 10px;
+    }
+    
+    .levelPriority {
+        width: 70px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .priorityLow {
+        color: green;
+        background-color: #7fffd4;
+    }
+    
+    .priorityMedium {
+        background-color: #ffec8b;
+        color: #e28b00;
+    }
+    
+    .priorityHight {
+        background-color: #ff9999;
+        color: #99001f;
+    }
+    
+    .line {
+        height: 1px;
+        width: 70%;
+        background-color: black;
+        margin: auto;
+    }
