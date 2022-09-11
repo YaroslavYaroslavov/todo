@@ -1,98 +1,89 @@
 const taskInput = document.querySelector('.taskInput'),
-    selectMember = document.querySelector('.selectMember'),
     saveBtn = document.querySelector('.saveBtn'),
     selectPriority = document.querySelector('.selectPriority'),
     taskResponsible = document.querySelector('.selectMember'),
-
     taskList = document.querySelector('.taskList');
-let taskCount = taskList.childElementCount;
-let tasks = []
-
-document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('tasksStorage') !== null) {
-        tasks = JSON.parse(localStorage.getItem('tasksStorage'))
-    } else(
-        localStorage.setItem('tasksStorage', tasks)
-    )
-    const createTaskElement = (item) => {
-        const taskListWrapper = document.createElement('div'),
-            line = document.createElement('div'),
-            stringWrap = document.createElement('div'),
-            nameTask = document.createElement('div'),
-            nameResponsible = document.createElement('div'),
-            levelPriority = document.createElement('div'),
-            checkBtn = document.createElement('button');
-        let priority = levelPriority.textContent;
-
-        taskListWrapper.classList.add('taskListWrapper')
-        checkBtn.classList.add('checkBtn')
-        stringWrap.classList.add('stringWrap')
-        line.classList.add('line')
-        nameTask.classList.add('nameTask')
-        levelPriority.classList.add('levelPriority')
-        nameResponsible.classList.add('nameResponsible')
-
-        nameTask.textContent = item.name
-        nameResponsible.textContent = item.responsible
-
-        levelPriority.textContent = item.priority
-        priority = levelPriority.textContent
-        levelPriority.classList.add(`priority${priority}`)
+let taskCount = taskList.childElementCount,
+    tasks = [];
 
 
-        if (!taskList.childElementCount) {
-            taskCount = 0;
-        } else {
-            taskCount = taskList.childElementCount
-        }
-        taskListWrapper.id = `${taskCount}`
-        checkBtn.addEventListener('click', () => removeTask(Number(taskListWrapper.id)))
-        taskListWrapper.append(nameTask)
-        taskListWrapper.append(nameResponsible)
-        taskListWrapper.append(levelPriority)
-        taskListWrapper.append(checkBtn)
+const createTaskElement = (item) => {
+    const taskListWrapper = document.createElement('div'),
+        line = document.createElement('div'),
+        stringWrap = document.createElement('div'),
+        nameTask = document.createElement('div'),
+        nameResponsible = document.createElement('div'),
+        levelPriority = document.createElement('div'),
+        checkBtn = document.createElement('button');
+    let priority = levelPriority.textContent;
 
-        stringWrap.append(taskListWrapper)
-        stringWrap.append(line)
-        return stringWrap
+    taskListWrapper.classList.add('taskListWrapper')
+    checkBtn.classList.add('checkBtn')
+    stringWrap.classList.add('stringWrap')
+    line.classList.add('line')
+    nameTask.classList.add('nameTask')
+    levelPriority.classList.add('levelPriority')
+    nameResponsible.classList.add('nameResponsible')
+
+    nameTask.textContent = item.name
+    nameResponsible.textContent = item.responsible
+
+    levelPriority.textContent = item.priority
+    priority = levelPriority.textContent
+    levelPriority.classList.add(`priority${priority}`)
+
+
+    if (!taskList.childElementCount) {
+        taskCount = 0;
+    } else {
+        taskCount = taskList.childElementCount
     }
+    taskListWrapper.id = `${taskCount}`
+    checkBtn.addEventListener('click', () => removeTask(Number(taskListWrapper.id)))
+    taskListWrapper.append(nameTask)
+    taskListWrapper.append(nameResponsible)
+    taskListWrapper.append(levelPriority)
+    taskListWrapper.append(checkBtn)
+
+    stringWrap.append(taskListWrapper)
+    stringWrap.append(line)
+    return stringWrap
+}
 
 
-    const removeTask = (numberTask) => {
-        tasks.splice(numberTask, 1);
-        localStorage.setItem('tasksStorage', JSON.stringify(tasks))
-        renderItems();
+const removeTask = (numberTask) => {
+    tasks.splice(numberTask, 1);
+    localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+    renderItems();
+}
+
+const renderItems = () => {
+    taskList.textContent = '';
 
 
-    }
+    tasks.forEach((item) => {
+        let stringWrap = createTaskElement(item)
+        taskList.append(stringWrap)
+    })
+}
 
-    const renderItems = () => {
-        taskList.textContent = ''; // бля не бей я в процессе
-
-
-        tasks.forEach((item) => {
-
-            let stringWrap = createTaskElement(item)
-
-            taskList.append(stringWrap)
-
-
+const addTask = () => {
+    if (!tasks.find((elem) => elem.name === taskInput.value) && taskInput.value !== '') {
+        tasks.push({
+            name: taskInput.value,
+            responsible: taskResponsible.value,
+            priority: selectPriority.value,
         })
     }
+    localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+    renderItems()
+}
 
-    const addTask = () => {
-        if (tasks.find((elem) => elem.name === taskInput.value) || !taskInput.value) {
 
-        } else {
-            tasks.push({
-                name: taskInput.value,
-                responsible: taskResponsible.value,
-                priority: selectPriority.value,
-            })
-        }
-        localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('tasksStorage')) {
+        tasks = JSON.parse(localStorage.getItem('tasksStorage'))
         renderItems()
     }
     saveBtn.addEventListener("click", addTask)
-    renderItems()
 })
