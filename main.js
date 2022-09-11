@@ -7,13 +7,13 @@ const taskInput = document.querySelector('.taskInput'),
     taskList = document.querySelector('.taskList');
 let taskCount = taskList.childElementCount;
 let tasks = []
+
 document.addEventListener('DOMContentLoaded', () => {
     tasks = JSON.parse(localStorage.getItem('tasksStorage'))
     renderItems()
 })
 
 const createTaskElement = (item) => {
-
     const taskListWrapper = document.createElement('div'),
         line = document.createElement('div'),
         stringWrap = document.createElement('div'),
@@ -39,7 +39,11 @@ const createTaskElement = (item) => {
     levelPriority.classList.add(`priority${priority}`)
 
 
-    taskCount = taskList.childElementCount - 1;
+    if (!taskList.childElementCount) {
+        taskCount = 0;
+    } else {
+        taskCount = taskList.childElementCount
+    }
     taskListWrapper.id = `${taskCount}`
     checkBtn.addEventListener('click', () => removeTask(Number(taskListWrapper.id)))
     taskListWrapper.append(nameTask)
@@ -53,25 +57,30 @@ const createTaskElement = (item) => {
 }
 
 
-const removeTask = (a) => {
-    tasks.splice(a, 1);
+const removeTask = (numberTask) => {
+    tasks.splice(numberTask, 1);
     localStorage.setItem('tasksStorage', JSON.stringify(tasks))
     renderItems();
 
+
 }
 
-function renderItems() {
+const renderItems = () => {
     taskList.textContent = ''; // бля не бей я в процессе
+
+
     tasks.forEach((item) => {
 
-        stringWrap = createTaskElement(item)
+        let stringWrap = createTaskElement(item)
 
         taskList.append(stringWrap)
+
+
     })
 }
 
-function addTask() {
-    if (tasks.find((elem) => elem.name === taskInput.value) || taskInput.value === "") {
+const addTask = () => {
+    if (tasks.find((elem) => elem.name === taskInput.value) || !taskInput.value) {
 
     } else {
         tasks.push({
