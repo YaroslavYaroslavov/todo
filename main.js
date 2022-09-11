@@ -60,9 +60,9 @@ const removeTask = (numberTask) => {
 const renderItems = () => {
     taskList.textContent = '';
 
-
     tasks.forEach((item) => {
-        let stringWrap = createTaskElement(item)
+        const stringWrap = createTaskElement(item)
+
         taskList.append(stringWrap)
     })
 }
