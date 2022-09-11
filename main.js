@@ -93,3 +93,4 @@ const addTask = () => {
     renderItems()
 }
 saveBtn.addEventListener("click", addTask)
+console.log('kekw')
