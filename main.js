@@ -15,7 +15,6 @@ const createTaskElement = (item) => {
         nameResponsible = document.createElement('div'),
         levelPriority = document.createElement('div'),
         checkBtn = document.createElement('button');
-    let priority = levelPriority.textContent;
 
     taskListWrapper.classList.add('taskListWrapper')
     checkBtn.classList.add('checkBtn')
@@ -29,7 +28,7 @@ const createTaskElement = (item) => {
     nameResponsible.textContent = item.responsible
 
     levelPriority.textContent = item.priority
-    priority = levelPriority.textContent
+    let priority = levelPriority.textContent
     levelPriority.classList.add(`priority${priority}`)
 
 
@@ -65,6 +64,7 @@ const renderItems = () => {
 
         taskList.append(stringWrap)
     })
+    taskInput.value = ''
 }
 
 const addTask = () => {
@@ -77,6 +77,7 @@ const addTask = () => {
     }
     localStorage.setItem('tasksStorage', JSON.stringify(tasks))
     renderItems()
+
 }
 
 
@@ -86,4 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
         renderItems()
     }
     saveBtn.addEventListener("click", addTask)
+    document.addEventListener('keydown', (event) => {
+        if (event.code == 'Enter') {
+            addTask()
+        }
+    });
 })
