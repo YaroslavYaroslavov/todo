@@ -6,19 +6,39 @@ const taskInput = document.querySelector('.taskInput'),
 let taskCount = taskList.childElementCount,
     tasks = [];
 
+const renderItems = () => {
+    taskList.textContent = '';
+
+    tasks.forEach((item) => {
+        const stringWrap = createTaskElement(item)
+
+        taskList.append(stringWrap)
+    })
+
+}
+
+const removeTask = (elem) => {
+    tasks = tasks.filter(task => task.name !== elem)
+    localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+    renderItems();
+}
 
 const createTaskElement = (item) => {
     const taskListWrapper = document.createElement('div'),
         line = document.createElement('div'),
-        stringWrap = document.createElement('div'),
+        taskElement = document.createElement('div'),
         nameTask = document.createElement('div'),
         nameResponsible = document.createElement('div'),
         levelPriority = document.createElement('div'),
+        deleteBtn = document.createElement('button'),
+        taskElementBtns = document.createElement('div'),
         checkBtn = document.createElement('button');
 
+    taskElementBtns.classList.add('taskElementBtns')
     taskListWrapper.classList.add('taskListWrapper')
+    deleteBtn.classList.add('deleteBtn')
     checkBtn.classList.add('checkBtn')
-    stringWrap.classList.add('stringWrap')
+    taskElement.classList.add('taskElement')
     line.classList.add('line')
     nameTask.classList.add('nameTask')
     levelPriority.classList.add('levelPriority')
@@ -32,39 +52,21 @@ const createTaskElement = (item) => {
     levelPriority.classList.add(`priority${priority}`)
 
 
-    if (!taskList.childElementCount) {
-        taskCount = 0;
-    } else {
-        taskCount = taskList.childElementCount
-    }
-    taskListWrapper.id = `${taskCount}`
-    checkBtn.addEventListener('click', () => removeTask(Number(taskListWrapper.id)))
+    deleteBtn.addEventListener('click', () => {
+        removeTask(item.name)
+    })
     taskListWrapper.append(nameTask)
     taskListWrapper.append(nameResponsible)
     taskListWrapper.append(levelPriority)
-    taskListWrapper.append(checkBtn)
 
-    stringWrap.append(taskListWrapper)
-    stringWrap.append(line)
-    return stringWrap
-}
+    taskElementBtns.append(checkBtn)
+    taskElementBtns.append(deleteBtn)
 
+    taskListWrapper.append(taskElementBtns)
 
-const removeTask = (numberTask) => {
-    tasks.splice(numberTask, 1);
-    localStorage.setItem('tasksStorage', JSON.stringify(tasks))
-    renderItems();
-}
-
-const renderItems = () => {
-    taskList.textContent = '';
-
-    tasks.forEach((item) => {
-        const stringWrap = createTaskElement(item)
-
-        taskList.append(stringWrap)
-    })
-    taskInput.value = ''
+    taskElement.append(taskListWrapper)
+    taskElement.append(line)
+    return taskElement
 }
 
 const addTask = () => {
@@ -74,20 +76,20 @@ const addTask = () => {
             responsible: taskResponsible.value,
             priority: selectPriority.value,
         })
+        localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+        renderItems()
+        taskInput.value = ''
     }
-    localStorage.setItem('tasksStorage', JSON.stringify(tasks))
-    renderItems()
-
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('tasksStorage')) {
         tasks = JSON.parse(localStorage.getItem('tasksStorage'))
         renderItems()
     }
+
     saveBtn.addEventListener("click", addTask)
-    document.addEventListener('keydown', (event) => {
+    taskInput.addEventListener('keydown', (event) => {
         if (event.code == 'Enter') {
             addTask()
         }

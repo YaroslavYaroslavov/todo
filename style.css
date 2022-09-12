@@ -43,7 +43,7 @@
         width: 27px;
         height: 27px;
         border: none;
-        margin-left: 36.5px;
+        /* margin-left: 36.5px; */
         margin-right: 36.5px;
     }
     
@@ -51,6 +51,23 @@
         width: 100px;
         height: 31px;
         border: 1px solid black;
+    }
+    
+    .deleteBtn {
+        /* background-color: #fff; */
+        /* background-image: url(./materials/checkbox-active-svgrepo-com.svg); */
+        width: 27px;
+        height: 27px;
+        /* border: none; */
+        /* margin-left: 36.5x; */
+        /* margin-right: 36.5px; */
+    }
+    
+    .taskElementBtns {
+        width: 130px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .taskInput {
