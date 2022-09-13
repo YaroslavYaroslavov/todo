@@ -4,23 +4,33 @@ const taskInput = document.querySelector('.taskInput'),
     taskResponsible = document.querySelector('.selectMember'),
     taskList = document.querySelector('.taskList');
 let taskCount = taskList.childElementCount,
-    tasks = [];
+    tasks = [],
+    renderedTasksArray = [],
+    renderedTasks = Array.from(document.querySelectorAll('.nameTask'));
 
 const renderItems = () => {
-    taskList.textContent = '';
-
+    // taskList.textContent = '';
+    console.log(renderedTasks)
     tasks.forEach((item) => {
-        const stringWrap = createTaskElement(item)
-
-        taskList.append(stringWrap)
+        if (renderedTasks.find(elem => elem.textContent === item.name)) {
+            return
+        } else {
+            const taskElement = createTaskElement(item)
+            taskList.append(taskElement)
+            renderedTasks = Array.from(document.querySelectorAll('.nameTask'));
+        }
     })
+}
 
+const findElem = (el) => {
+    return renderedTasks.find(elem => elem.textContent === el.name).parentNode.parentNode
 }
 
 const removeTask = (elem) => {
-    tasks = tasks.filter(task => task.name !== elem)
+    findElem(elem).remove()
+    tasks = tasks.filter(task => task.name !== elem.name)
     localStorage.setItem('tasksStorage', JSON.stringify(tasks))
-    renderItems();
+
 }
 
 const createTaskElement = (item) => {
@@ -53,7 +63,7 @@ const createTaskElement = (item) => {
 
 
     deleteBtn.addEventListener('click', () => {
-        removeTask(item.name)
+        removeTask(item)
     })
     taskListWrapper.append(nameTask)
     taskListWrapper.append(nameResponsible)
