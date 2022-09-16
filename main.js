@@ -6,23 +6,22 @@ const taskInput = document.querySelector('.taskInput'),
     taskDoneList = document.querySelector('.taskDoneList');
 let taskCount = taskList.childElementCount,
     tasks = [],
-    renderedTasksArray = [],
     doneTasks = [],
     renderedTasks = Array.from(document.querySelectorAll('.nameTask'));
 
 
+const isRender = (item) => renderedTasks.find(elem => elem.textContent === item.name)
+
 const renderItems = () => {
     tasks.forEach((item) => {
-        if (renderedTasks.find(elem => elem.textContent === item.name)) {
+        if (isRender(item)) {
             return
-        } else {
-            const taskElement = createTaskElement(item)
-            taskList.append(taskElement)
-            renderedTasks = Array.from(document.querySelectorAll('.nameTask'));
         }
+        taskList.append(createTaskElement(item))
+        renderedTasks = Array.from(document.querySelectorAll('.nameTask'));
     })
     doneTasks.forEach((item) => {
-        if (renderedTasks.find(elem => elem.textContent === item.name)) {
+        if (isRender(item)) {
             return
         } else {
             const taskElement = createTaskElement(item)
@@ -34,11 +33,11 @@ const renderItems = () => {
 }
 
 
-const findElem = (el) => renderedTasks.find(elem => elem.textContent === el.name).parentNode.parentNode
+const findTodo = (el) => renderedTasks.find(elem => elem.textContent === el.name).parentNode.parentNode
 
 
 const removeTask = (elem) => {
-    findElem(elem).remove()
+    findTodo(elem).remove()
     tasks = tasks.filter(task => task.name !== elem.name)
     doneTasks = doneTasks.filter(doneTask => doneTask.name !== elem.name)
 
@@ -110,14 +109,12 @@ const addTask = () => {
 }
 
 const checkTask = (elem) => {
-    console.log(doneTasks)
     doneTasks.push(elem)
 
     tasks = tasks.filter(task => task.name !== elem.name)
-    taskDoneList.append(findElem(elem))
+    taskDoneList.append(findTodo(elem))
     localStorage.setItem('tasksStorage', JSON.stringify(tasks))
     localStorage.setItem('doneTasksStorage', JSON.stringify(doneTasks))
-        // removeTask(elem);
 
 }
 document.addEventListener('DOMContentLoaded', () => {
