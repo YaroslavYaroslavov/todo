@@ -1,13 +1,14 @@
-const taskInput = document.querySelector('.taskInput'),
-    saveBtn = document.querySelector('.saveBtn'),
-    selectPriority = document.querySelector('.selectPriority'),
-    taskResponsible = document.querySelector('.selectMember'),
-    taskList = document.querySelector('.taskList'),
-    taskDoneList = document.querySelector('.taskDoneList');
-let taskCount = taskList.childElementCount,
-    tasks = [],
-    doneTasks = [],
-    renderedTasks = Array.from(document.querySelectorAll('.nameTask'));
+const taskInput = document.querySelector('.taskInput')
+const saveBtn = document.querySelector('.saveBtn')
+const selectPriority = document.querySelector('.selectPriority')
+const taskResponsible = document.querySelector('.selectMember')
+const taskList = document.querySelector('.taskList')
+const taskDoneList = document.querySelector('.taskDoneList')
+
+let taskCount = taskList.childElementCount
+let tasks = []
+let doneTasks = []
+let renderedTasks = Array.from(document.querySelectorAll('.nameTask'))
 
 
 const isRender = (item) => renderedTasks.find(elem => elem.textContent === item.name)
@@ -33,11 +34,11 @@ const renderItems = () => {
 }
 
 
-const findTodo = (el) => renderedTasks.find(elem => elem.textContent === el.name).parentNode.parentNode
-
+const findElem = (el) => renderedTasks.find(elem => elem.textContent === el.name).parentNode.parentNode
+const findTodo = (arr, item) => arr.find((elem) => elem.name === item)
 
 const removeTask = (elem) => {
-    findTodo(elem).remove()
+    findElem(elem).remove()
     tasks = tasks.filter(task => task.name !== elem.name)
     doneTasks = doneTasks.filter(doneTask => doneTask.name !== elem.name)
 
@@ -95,7 +96,11 @@ const createTaskElement = (item) => {
 }
 
 const addTask = () => {
-    if (!tasks.find((elem) => elem.name === taskInput.value) && taskInput.value !== '' && !doneTasks.find((elem) => elem.name === taskInput.value)) {
+    const existInTasks = findTodo(tasks, taskInput.value)
+    const existInDoneTasks = findTodo(doneTasks, taskInput.value)
+
+    if (taskInput.value !== '' && !existInTasks && !existInDoneTasks) {
+
         tasks.push({
             name: taskInput.value,
             responsible: taskResponsible.value,
@@ -112,7 +117,7 @@ const checkTask = (elem) => {
     doneTasks.push(elem)
 
     tasks = tasks.filter(task => task.name !== elem.name)
-    taskDoneList.append(findTodo(elem))
+    taskDoneList.append(findElem(elem))
     localStorage.setItem('tasksStorage', JSON.stringify(tasks))
     localStorage.setItem('doneTasksStorage', JSON.stringify(doneTasks))
 
