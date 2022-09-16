@@ -21,18 +21,29 @@ const renderItems = () => {
             renderedTasks = Array.from(document.querySelectorAll('.nameTask'));
         }
     })
+    doneTasks.forEach((item) => {
+        if (renderedTasks.find(elem => elem.textContent === item.name)) {
+            return
+        } else {
+            const taskElement = createTaskElement(item)
+            taskDoneList.append(taskElement)
+            renderedTasks = Array.from(document.querySelectorAll('.nameTask'));
+        }
+    })
+
 }
 
 
-const findElem = (el) => {
-    return renderedTasks.find(elem => elem.textContent === el.name).parentNode.parentNode
-}
+const findElem = (el) => renderedTasks.find(elem => elem.textContent === el.name).parentNode.parentNode
+
 
 const removeTask = (elem) => {
     findElem(elem).remove()
     tasks = tasks.filter(task => task.name !== elem.name)
-    localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+    doneTasks = doneTasks.filter(doneTask => doneTask.name !== elem.name)
 
+    localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+    localStorage.setItem('doneTasksStorage', JSON.stringify(doneTasks))
 }
 
 const createTaskElement = (item) => {
@@ -85,28 +96,37 @@ const createTaskElement = (item) => {
 }
 
 const addTask = () => {
-    if (!tasks.find((elem) => elem.name === taskInput.value) && taskInput.value !== '') {
+    if (!tasks.find((elem) => elem.name === taskInput.value) && taskInput.value !== '' && !doneTasks.find((elem) => elem.name === taskInput.value)) {
         tasks.push({
             name: taskInput.value,
             responsible: taskResponsible.value,
             priority: selectPriority.value,
         })
         localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+
         renderItems()
         taskInput.value = ''
     }
 }
 
 const checkTask = (elem) => {
+    console.log(doneTasks)
     doneTasks.push(elem)
 
+    tasks = tasks.filter(task => task.name !== elem.name)
     taskDoneList.append(findElem(elem))
+    localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+    localStorage.setItem('doneTasksStorage', JSON.stringify(doneTasks))
         // removeTask(elem);
 
 }
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('tasksStorage')) {
         tasks = JSON.parse(localStorage.getItem('tasksStorage'))
+        renderItems()
+    }
+    if (localStorage.getItem('doneTasksStorage')) {
+        doneTasks = JSON.parse(localStorage.getItem('doneTasksStorage'))
         renderItems()
     }
 
