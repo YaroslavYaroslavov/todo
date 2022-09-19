@@ -51,12 +51,14 @@ body {
 .checkBtn {
     border-radius: 10px 0 0 10px;
     background-color: #6b9cdf;
-    /* background-image: url(./materials/checkbox-active-svgrepo-com.svg); */
+    background-image: url(./materials/accept-checklist-checkmark-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: center;
     width: 40px;
     height: 40px;
     border: none;
-    /* margin-left: 36.5px; */
     margin-right: 0;
+    background-size: 33px;
 }
 
 .saveBtn {
@@ -81,12 +83,12 @@ body {
     all: unset;
     border-radius: 0px 10px 10px 0px;
     background-color: #fb3149;
-    /* background-color: #fff; */
-    /* background-image: url(./materials/checkbox-active-svgrepo-com.svg); */
     width: 40px;
-    height: 40px/* border: none; */
-    /* margin-left: 36.5x; */
-    /* margin-right: 36.5px; */
+    height: 40px;
+    background-image: url(/materials/trash-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 33px;
 }
 
 .taskElementBtns {
@@ -109,7 +111,6 @@ body {
 }
 
 .selectMember {
-    /* all: unset; */
     margin-right: 10px;
     background-color: #444446;
     border: none;
@@ -154,7 +155,6 @@ body {
 
 .priorityLow {
     color: white;
-    /* background-color: #6f91ce; */
     background-color: #54ac55;
     font-weight: bold;
 }
@@ -181,7 +181,6 @@ body {
 }
 
 .taskDoneList {
-    /* border: 1px solid black; */
     padding-top: 10px;
     padding-bottom: 10px;
     margin-top: 20px;
