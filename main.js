@@ -26,8 +26,11 @@ const renderItems = () => {
             return
         } else {
             const taskElement = createTaskElement(item)
+            taskElement.classList.add('checked')
             taskDoneList.append(taskElement)
             renderedTasks = Array.from(document.querySelectorAll('.nameTask'));
+            // changeOpacity(item)
+
         }
     })
 
@@ -75,6 +78,7 @@ const createTaskElement = (item) => {
     levelPriority.classList.add(`priority${priority}`)
 
 
+
     deleteBtn.addEventListener('click', () => {
         removeTask(item)
     })
@@ -89,6 +93,7 @@ const createTaskElement = (item) => {
     taskElementBtns.append(deleteBtn)
 
     taskListWrapper.append(taskElementBtns)
+
 
     taskElement.append(taskListWrapper)
     taskElement.append(line)
@@ -105,6 +110,9 @@ const addTask = () => {
             name: taskInput.value,
             responsible: taskResponsible.value,
             priority: selectPriority.value,
+            timeToRemoveToDo: Date.now() + (24 * 3600 * 1000)
+                // timeToRemoveToDo: Date.now() + (600 * 1000)
+
         })
         localStorage.setItem('tasksStorage', JSON.stringify(tasks))
 
@@ -114,14 +122,33 @@ const addTask = () => {
 }
 
 const checkTask = (elem) => {
+    const curElem = findElem(elem)
+
     doneTasks.push(elem)
 
     tasks = tasks.filter(task => task.name !== elem.name)
-    taskDoneList.append(findElem(elem))
+
+    curElem.classList.add('checked')
+
+    taskDoneList.append(curElem)
     localStorage.setItem('tasksStorage', JSON.stringify(tasks))
     localStorage.setItem('doneTasksStorage', JSON.stringify(doneTasks))
 
 }
+
+const changeOpacity = () => {
+    doneTasks.forEach(obj => {
+        const newOpacity = (obj.timeToRemoveToDo - Date.now()) / 3600 / 1000 / 0.24;
+        const currentElem = findElem(obj)
+        if (newOpacity < 0.20) {
+            removeTask(obj)
+        } else {
+            currentElem.style.opacity = `${newOpacity}`
+        }
+    });
+
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('tasksStorage')) {
         tasks = JSON.parse(localStorage.getItem('tasksStorage'))
@@ -138,4 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
             addTask()
         }
     });
+
+    setInterval(changeOpacity, 1000)
 })
