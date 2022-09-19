@@ -4,6 +4,12 @@ const selectPriority = document.querySelector('.selectPriority')
 const taskResponsible = document.querySelector('.selectMember')
 const taskList = document.querySelector('.taskList')
 const taskDoneList = document.querySelector('.taskDoneList')
+const oneSecond = 1000;
+const oneHour = 3600000
+const oneDay = 86400000;
+const onePercent = 0.24
+    // const onePercent =;
+
 
 let taskCount = taskList.childElementCount
 let tasks = []
@@ -29,7 +35,6 @@ const renderItems = () => {
             taskElement.classList.add('checked')
             taskDoneList.append(taskElement)
             renderedTasks = Array.from(document.querySelectorAll('.nameTask'));
-            // changeOpacity(item)
 
         }
     })
@@ -110,9 +115,7 @@ const addTask = () => {
             name: taskInput.value,
             responsible: taskResponsible.value,
             priority: selectPriority.value,
-            timeToRemoveToDo: Date.now() + (24 * 3600 * 1000)
-                // timeToRemoveToDo: Date.now() + (600 * 1000)
-
+            timeToRemoveToDo: Date.now() + oneDay
         })
         localStorage.setItem('tasksStorage', JSON.stringify(tasks))
 
@@ -138,7 +141,7 @@ const checkTask = (elem) => {
 
 const changeOpacity = () => {
     doneTasks.forEach(obj => {
-        const newOpacity = (obj.timeToRemoveToDo - Date.now()) / 3600 / 1000 / 0.24;
+        const newOpacity = (obj.timeToRemoveToDo - Date.now()) / (oneHour / oneSecond) / oneSecond / onePercent;
         const currentElem = findElem(obj)
         if (newOpacity < 0.20) {
             removeTask(obj)
