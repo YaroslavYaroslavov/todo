@@ -169,5 +169,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    setInterval(changeOpacity, 1000)
+    setInterval(changeOpacity, oneSecond)
 })
