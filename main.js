@@ -52,11 +52,11 @@ const removeTask = (elem) => {
 
     localStorage.setItem('tasksStorage', JSON.stringify(tasks))
     localStorage.setItem('doneTasksStorage', JSON.stringify(doneTasks))
+    renderedTasks = Array.from(document.querySelectorAll('.nameTask'))
 }
 
 const createTaskElement = (item) => {
     const taskListWrapper = document.createElement('div'),
-        line = document.createElement('div'),
         taskElement = document.createElement('div'),
         nameTask = document.createElement('div'),
         nameResponsible = document.createElement('div'),
@@ -70,7 +70,6 @@ const createTaskElement = (item) => {
     deleteBtn.classList.add('deleteBtn')
     checkBtn.classList.add('checkBtn')
     taskElement.classList.add('taskElement')
-    line.classList.add('line')
     nameTask.classList.add('nameTask')
     levelPriority.classList.add('levelPriority')
     nameResponsible.classList.add('nameResponsible')
@@ -101,7 +100,6 @@ const createTaskElement = (item) => {
 
 
     taskElement.append(taskListWrapper)
-    taskElement.append(line)
     return taskElement
 }
 
@@ -126,16 +124,27 @@ const addTask = () => {
 
 const checkTask = (elem) => {
     const curElem = findElem(elem)
+    if (!curElem.classList.contains('checked')) {
+        doneTasks.push(elem)
 
-    doneTasks.push(elem)
+        tasks = tasks.filter(task => task.name !== elem.name)
 
-    tasks = tasks.filter(task => task.name !== elem.name)
+        curElem.classList.add('checked')
 
-    curElem.classList.add('checked')
+        taskDoneList.append(curElem)
+        localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+        localStorage.setItem('doneTasksStorage', JSON.stringify(doneTasks))
+    } else {
+        elem.timeToRemoveToDo = Date.now() + oneDay
+        tasks.push(elem)
+        doneTasks = doneTasks.filter(doneTask => doneTask.name !== elem.name)
+        curElem.classList.remove('checked')
+        taskList.append(curElem)
+        localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+        localStorage.setItem('doneTasksStorage', JSON.stringify(doneTasks))
+    }
 
-    taskDoneList.append(curElem)
-    localStorage.setItem('tasksStorage', JSON.stringify(tasks))
-    localStorage.setItem('doneTasksStorage', JSON.stringify(doneTasks))
+
 
 }
 

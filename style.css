@@ -1,148 +1,188 @@
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    
-    .taskListWrapper {
-        display: flex;
-        height: 40px;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .wrapper {
-        /* width: 700px; */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    
-    .container {
-        margin-left: auto;
-        margin-right: auto;
-        width: 900px;
-        border-color: black;
-        border: 1px solid black;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-    
-    .logoText {
-        width: 150px;
-        margin: auto;
-        padding-bottom: 10px;
-        padding-top: 10px;
-        font-size: 25px;
-        font-weight: bold;
-    }
-    
-    .checkBtn {
-        background-color: #fff;
-        background-image: url(./materials/checkbox-active-svgrepo-com.svg);
-        width: 27px;
-        height: 27px;
-        border: none;
-        /* margin-left: 36.5px; */
-        margin-right: 36.5px;
-    }
-    
-    .saveBtn {
-        width: 100px;
-        height: 31px;
-        border: 1px solid black;
-    }
-    
-    .deleteBtn {
-        /* background-color: #fff; */
-        /* background-image: url(./materials/checkbox-active-svgrepo-com.svg); */
-        width: 27px;
-        height: 27px;
-        /* border: none; */
-        /* margin-left: 36.5x; */
-        /* margin-right: 36.5px; */
-    }
-    
-    .taskElementBtns {
-        width: 130px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .taskInput {
-        width: 200px;
-        height: 29px;
-        padding: 0px;
-        border: 1px solid black;
-        margin-right: 10px;
-    }
-    
-    .selectMember {
-        width: 200px;
-        height: 31px;
-        margin-right: 10px;
-        border: 1px solid black;
-    }
-    
-    .selectPriority {
-        width: 7 0px;
-        height: 31px;
-        margin-right: 10px;
-        border: 1px solid black;
-    }
-    
-    .nameTask {
-        width: 200px;
-        padding: 0px;
-        margin-right: 10px;
-        word-wrap: break-word
-    }
-    
-    .nameResponsible {
-        width: 200px;
-        margin-right: 10px;
-    }
-    
-    .levelPriority {
-        width: 70px;
-        margin-right: 10px;
-        display: flex;
-        justify-content: center;
-    }
-    
-    .priorityLow {
-        color: green;
-        background-color: #7fffd4;
-    }
-    
-    .priorityMedium {
-        background-color: #ffec8b;
-        color: #e28b00;
-    }
-    
-    .priorityHight {
-        background-color: #ff9999;
-        color: #99001f;
-    }
-    
-    .line {
-        height: 1px;
-        width: 70%;
-        background-color: black;
-        margin: auto;
-    }
-    
-    .checked {
-        padding-top: 10px;
-        background-color: greenyellow;
-        /* opacity: 50% */
-        /* text-decoration: dashed; */
-    }
-    
-    .taskDoneList {
-        /* border: 1px solid black; */
-        padding-top: 10px;
-        padding-bottom: 10px;
-        margin-top: 20px;
-    }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #222126;
+}
+
+.taskListWrapper {
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    background-color: #333335;
+    margin-bottom: 10px;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+    padding-top: 15px;
+    padding-bottom: 40px;
+    border-radius: 40px;
+    margin-top: 100px;
+    background-color: #333335;
+}
+
+.logoText {
+    color: white;
+    width: 200px;
+    margin: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.taskElement {
+    padding-top: 5px;
+    background-color: #444446;
+    color: white;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.checkBtn {
+    border-radius: 10px 0 0 10px;
+    background-color: #6b9cdf;
+    /* background-image: url(./materials/checkbox-active-svgrepo-com.svg); */
+    width: 40px;
+    height: 40px;
+    border: none;
+    /* margin-left: 36.5px; */
+    margin-right: 0;
+}
+
+.saveBtn {
+    all: unset;
+    width: 100px;
+    height: 33px;
+    background-color: #444446;
+    color: white;
+    border-radius: 10px;
+    font-size: small;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.deleteBtn {
+    all: unset;
+    border-radius: 0px 10px 10px 0px;
+    background-color: #fb3149;
+    /* background-color: #fff; */
+    /* background-image: url(./materials/checkbox-active-svgrepo-com.svg); */
+    width: 40px;
+    height: 40px/* border: none; */
+    /* margin-left: 36.5x; */
+    /* margin-right: 36.5px; */
+}
+
+.taskElementBtns {
+    width: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.taskInput {
+    all: unset;
+    margin-right: 10px;
+    width: 190px;
+    height: 33px;
+    background-color: #444446;
+    color: white;
+    padding-left: 10px;
+    border-radius: 10px;
+    font-size: small;
+}
+
+.selectMember {
+    /* all: unset; */
+    margin-right: 10px;
+    background-color: #444446;
+    border: none;
+    color: white;
+    font-size: small;
+    font-weight: normal;
+    border-radius: 10px;
+    width: 200px;
+    height: 33px;
+}
+
+.selectPriority {
+    margin-right: 10px;
+    background-color: #444446;
+    border: none;
+    color: white;
+    font-size: small;
+    font-weight: normal;
+    border-radius: 10px;
+    height: 33px;
+    padding-left: 5px;
+}
+
+.nameTask {
+    width: 200px;
+    padding: 0px;
+    margin-right: 10px;
+    word-wrap: break-word
+}
+
+.nameResponsible {
+    width: 200px;
+    margin-right: 10px;
+}
+
+.levelPriority {
+    width: 70px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.priorityLow {
+    color: white;
+    /* background-color: #6f91ce; */
+    background-color: #54ac55;
+    font-weight: bold;
+}
+
+.priorityMedium {
+    background-color: #ffa61a;
+    color: white;
+    font-weight: bold;
+}
+
+.priorityHight {
+    background-color: #fb3149;
+    color: white;
+    font-weight: bold;
+}
+
+.line {
+    height: 1px;
+    width: 70%;
+    background-color: #656567;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.taskDoneList {
+    /* border: 1px solid black; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
