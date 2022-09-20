@@ -7,8 +7,7 @@ const taskDoneList = document.querySelector('.taskDoneList')
 const oneSecond = 1000;
 const oneHour = 3600000
 const oneDay = 86400000;
-const onePercent = 0.24
-    // const onePercent =;
+const onePercent = 24
 
 
 let taskCount = taskList.childElementCount
