@@ -107,7 +107,6 @@ const addTask = () => {
     const existInDoneTasks = findTodo(doneTasks, taskInput.value)
 
     if (taskInput.value !== '' && !existInTasks && !existInDoneTasks) {
-
         tasks.push({
             name: taskInput.value,
             responsible: taskResponsible.value,
@@ -115,7 +114,6 @@ const addTask = () => {
             timeToRemoveToDo: Date.now() + oneDay
         })
         localStorage.setItem('tasksStorage', JSON.stringify(tasks))
-
         renderItems()
         taskInput.value = ''
     }
